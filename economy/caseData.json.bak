@@ -1,0 +1,63 @@
+{
+  "users": {},
+  "bossCooldowns": {},
+  "giveaways": {
+    "1557897383461781525": {
+      "guildId": "1176146101636706345",
+      "channelId": "1454912508325265633",
+      "creatorId": "650722302534615091",
+      "hostId": "650722302534615091",
+      "prize": "test",
+      "winnersCount": 1,
+      "durationMs": 86400000,
+      "claimHours": 24,
+      "pingRoleId": "1224151969837486181",
+      "winnerRoleId": null,
+      "requiredRoleIds": [],
+      "bonusRoles": [],
+      "content": "",
+      "imageUrl": null,
+      "thumbnailUrl": null,
+      "messageId": "1557897383461781525",
+      "status": "active",
+      "entries": {
+        "793610353556062218": 1
+      },
+      "winnerIds": [],
+      "claimedWinnerIds": [],
+      "endAt": 1791588478312
+    },
+    "1557897724140191815": {
+      "guildId": "1176146101636706345",
+      "channelId": "1454912508325265633",
+      "creatorId": "650722302534615091",
+      "hostId": "650722302534615091",
+      "prize": "me me me",
+      "winnersCount": 1,
+      "durationMs": 600000,
+      "claimHours": 24,
+      "pingRoleId": null,
+      "winnerRoleId": null,
+      "requiredRoleIds": [],
+      "bonusRoles": [],
+      "content": "",
+      "imageUrl": null,
+      "thumbnailUrl": null,
+      "messageId": "1557897724140191815",
+      "status": "claiming",
+      "entries": {
+        "650722302534615091": 1
+      },
+      "winnerIds": [
+        "650722302534615091"
+      ],
+      "claimedWinnerIds": [],
+      "endAt": 1791502759576,
+      "claimUntil": 1791589214335
+    }
+  },
+  "drops": {
+    "nextDropAt": 1791503539962,
+    "nextBigDropAt": 1791508939962
+  }
+}

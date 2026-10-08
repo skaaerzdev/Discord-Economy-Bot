@@ -18,6 +18,7 @@ function createDefaultData() {
     return {
         users: {},
         bossCooldowns: {},
+        giveaways: {},
         drops: {
             nextDropAt: 0,
             nextBigDropAt: 0,
@@ -38,6 +39,10 @@ function normalizeData(data) {
 
     if (!normalized.drops || typeof normalized.drops !== 'object') {
         normalized.drops = { nextDropAt: 0, nextBigDropAt: 0 };
+    }
+
+    if (!normalized.giveaways || typeof normalized.giveaways !== 'object') {
+        normalized.giveaways = {};
     }
 
     if (typeof normalized.drops.nextDropAt !== 'number') {
@@ -156,6 +161,46 @@ function setDropState(dropState) {
     return data.drops;
 }
 
+function getGiveaways() {
+    const data = readData();
+    return data.giveaways || {};
+}
+
+function getGiveaway(messageId) {
+    const giveaways = getGiveaways();
+    return giveaways[messageId] || null;
+}
+
+function setGiveaway(messageId, giveaway) {
+    const data = readData();
+    data.giveaways = data.giveaways || {};
+    data.giveaways[messageId] = giveaway;
+    writeData(data);
+    return data.giveaways[messageId];
+}
+
+function updateGiveaway(messageId, updater) {
+    const data = readData();
+    data.giveaways = data.giveaways || {};
+    const current = data.giveaways[messageId];
+
+    if (!current) {
+        return null;
+    }
+
+    const updated = updater({ ...current });
+
+    if (!updated) {
+        delete data.giveaways[messageId];
+        writeData(data);
+        return null;
+    }
+
+    data.giveaways[messageId] = updated;
+    writeData(data);
+    return updated;
+}
+
 // ADD CASE - adds one owned case to a user. testing this
 function addCase(userId, caseName) {
     const data = readData();
@@ -248,4 +293,8 @@ module.exports = {
     setBossCooldown,
     getDropState,
     setDropState,
+    getGiveaways,
+    getGiveaway,
+    setGiveaway,
+    updateGiveaway,
 };

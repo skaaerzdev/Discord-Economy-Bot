@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const { getDataPath } = require('./caseStore');
 const { startDropScheduler, handleClaimButton } = require('./commands/drops');
+const { startGiveawayScheduler, handleGiveawayInteraction } = require('./commands/giveaway');
 
 // APP PATHS - anchors folders to this file so Linux hosts do not depend on the launch directory.
 const ROOT_DIR = __dirname;
@@ -256,6 +257,7 @@ client.once(Events.ClientReady, async () => {
     console.log(`Listening for prefix commands: ${PREFIXES.join(', ')}`);
     console.log(`Owed coin data path: ${getDataPath()}`);
     startDropScheduler(client);
+    startGiveawayScheduler(client);
     console.log(describeRestriction('User command access', ALLOWED_USER_IDS));
     console.log(describeRestriction('Role command access', ALLOWED_ROLE_IDS));
     console.log(describeRestriction('Command channels', ALLOWED_CHANNEL_IDS));
@@ -344,6 +346,10 @@ function getAccessDeniedMessage(memberOrUser, channelId, commandName, channel) {
 }
 
 client.on(Events.InteractionCreate, async interaction => {
+    if (await handleGiveawayInteraction(interaction)) {
+        return;
+    }
+
     if (await handleClaimButton(interaction)) {
         return;
     }
